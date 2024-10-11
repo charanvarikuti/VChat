@@ -52,13 +52,19 @@
     .form{
         .speech{
             margin-top: 4px;
-            width: 20%;
+            width: 14%;
         }
     }
   
 }
 .text-area{
     width: 60% ;
+}
+@media screen  and (max-width:767px) 
+{
+    .text-area{
+        width: 72%;
+    }
 }
 .req_text{
     display: grid;
@@ -314,4 +320,22 @@
     justify-content: center;
     align-items: center;
     height: 90vh;
+}
+.side-button {
+    position: fixed; /* Fixed positioning to keep it on the side */
+    right: -25px; /* Initially hidden off-screen */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for true center */
+    padding: 15px 20px;
+    background-color: #F6F6B1; /* Blue background */
+    color: black; /* White text */
+    border: none; /* No border */
+    border-radius: 50%; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: right 0.3s; /* Smooth transition for sliding */
+}
+
+.side-button.active {
+    right: 20px; /* Position when active */
 }

@@ -32,6 +32,7 @@ export class AppComponent {
    loader:boolean=false
    loader1:boolean=false
    copied:boolean=false;
+   inputFld:any;
    initialFlag:boolean=false;
    textToSpeak: string = '';
    speakToogle:boolean=false;
@@ -68,19 +69,29 @@ export class AppComponent {
   }
   ngOnchanges(){
     let allItems = document.querySelectorAll('.dot');
+    let inputField = document.getElementById('inputField'); 
 
+    // Handle touch start event
+    inputField.addEventListener('touchstart', function(event) {
+        console.log('Touch started on input field');
+        inputField.style.backgroundColor = '#e0f7fa'; // Change background color on touch
+    });
   }
   sendData(data?:any){
+    let inputField = document.getElementById('inputField') as HTMLInputElement; 
+    inputField.disabled=true;
+    let c;
     this.logoFlag=false;
     this.loader=true;
     this.isTyping=true;
-    let c= !this.throughspeech? this.form.value.Chat:this.reqtxt;
-    if(this.reqtxt){
-      this.transcript=""
+    if(this.throughspeech && data){
+      this.inputFld='';
+      c=data;
+    }else{
+      this.inputFld='';
+      c=this.form.value.Chat
     }
-    this.popup=document.getElementById("inputField");
-    this.popup.value="";
-    
+    // let c= !this.throughspeech? this.form.value.Chat:this.reqtxt;
     if(c==""){
       this.loader=false;
       this.isTyping=false;
@@ -91,7 +102,7 @@ export class AppComponent {
       this.loader1=true
       this.speakToogle=false;
       this.chatHistory.push( {user:true,text:c});
-          let submitButton = document.getElementById('sendbtn')  as HTMLInputElement;;
+          let submitButton = document.getElementById('sendbtn')  as HTMLInputElement;
       this.checkInput()
       from(this.geminiService.genText(c)).subscribe(u => 
         {
@@ -99,6 +110,7 @@ export class AppComponent {
           this.loader=false
           this.txt = u
           this.initialFlag=true
+          inputField.disabled=false;
           let allItems = document.querySelectorAll('.dot');
           this.chatHistory.push({user:false,text: this.txt });
           setTimeout(() => {
@@ -148,7 +160,6 @@ export class AppComponent {
     this.isRecording = true;
     this.speechService.startListening((text: string) => {
       this.transcript = text;
-      this.reqtxt=this.transcript
     });
     // this.sendData(this.transcript)
   }
@@ -157,7 +168,8 @@ export class AppComponent {
     this.isRecording = false;
     this.throughspeech=true;
     this.speechService.stopListening();
-    // this.sendData(this.reqtxt);
+    this.inputFld=this.transcript;
+    this.sendData(this.inputFld);
 
 
   }
@@ -179,6 +191,20 @@ startChat(){
   inputField.focus();
   this.logoFlag=false;
 
+}
+clickBtn(){
+  let sideBtn = document.getElementById('side-button')  as HTMLButtonElement ;
+  sideBtn.classList.toggle('active');
+  sideBtn.textContent="okay"
+  // this.openMap();
+}
+openMap() {
+  const latitude = 37.7749;  // Replace with your desired latitude
+  const longitude = -122.4194; // Replace with your desired longitude
+  const zoom = 12; // Desired zoom level
+  const url = `https://www.google.com/maps/@?api=1&map_action=map&center=${latitude},${longitude}&zoom=${zoom}`;
+  
+  window.open(url, '_blank'); // Open in a new tab
 }
 }
 
