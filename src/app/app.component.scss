@@ -323,19 +323,38 @@
 }
 .side-button {
     position: fixed; /* Fixed positioning to keep it on the side */
-    right: -25px; /* Initially hidden off-screen */
+    right: -20px; /* Initially hidden off-screen */
     top: 50%; /* Center vertically */
     transform: translateY(-50%); /* Adjust for true center */
     padding: 15px 20px;
     background-color: #F6F6B1; /* Blue background */
     color: black; /* White text */
     border: none; /* No border */
-    border-radius: 50%; /* Rounded corners */
+    border-radius: 25%; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
     transition: right 0.3s; /* Smooth transition for sliding */
 }
-
+.side-button-inactive{
+  position: fixed; /* Fixed positioning to keep it on the side */
+  right: -20px; /* Initially hidden off-screen */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for true center */
+  padding: 15px 20px;
+  background-color: #F6F6B1; /* Blue background */
+  color: black; /* White text */
+  border: none; /* No border */
+  border-radius: 25%; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  transition: right 0.3s; /* Smooth transition for sliding */
+}
+.side-button-active{
+  right: 20px;
+}
 .side-button.active {
     right: 20px; /* Position when active */
 }
+// .act{
+//   right: 20px; /* Initially hidden off-screen */
+// }

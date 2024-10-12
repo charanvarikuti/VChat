@@ -37,6 +37,8 @@ export class AppComponent {
    textToSpeak: string = '';
    speakToogle:boolean=false;
    chatHistory:any=[];
+   index:any=0;
+   clickedBtn:boolean=false;
    transcript: string = '';
    isRecording: boolean = false;
    logoFlag:boolean=true;
@@ -101,7 +103,8 @@ export class AppComponent {
       this.loader=true;
       this.loader1=true
       this.speakToogle=false;
-      this.chatHistory.push( {user:true,text:c});
+      // let index=0;
+      this.chatHistory.push( {user:true,text:c,});
           let submitButton = document.getElementById('sendbtn')  as HTMLInputElement;
       this.checkInput()
       from(this.geminiService.genText(c)).subscribe(u => 
@@ -112,35 +115,38 @@ export class AppComponent {
           this.initialFlag=true
           inputField.disabled=false;
           let allItems = document.querySelectorAll('.dot');
-          this.chatHistory.push({user:false,text: this.txt });
+          this.index=this.index+1;
+          this.chatHistory.push({user:false,text: this.txt ,id:this.index});
           setTimeout(() => {
             this.loader1=false
           }, 1000);
         });
-        // this.popup = document.getElementById("popup");
-        // this.popup.classList.add("show");
-
-  // Hide the popup after 2 seconds
-  // setTimeout(function() {
-  //   this.popup.classList.remove("show");
-  // }, 2000);
 }
   }
   copytoclipboard(text: string){
+    this.stopSpeaking();
     this.clipboard.copy(text);  
     this.copied = true; 
-
+    this.clickedBtn=true;
+    this.speakToogle=false;
+    this.clickBtn();
     setTimeout(() => {
-      this.copied = false;
+      this.copied=false;
+      this.clickedBtn=false;
     }, 1000);
+    
   }
-  texttoSpeech(text:any){
+  texttoSpeech(text:any,eve?:any){
+    console.log(eve);
     this.speakToogle=true;
+    this.clickedBtn=true;
+    this.copied=false;
     this.ttsService.speak(text.text);
+    
   }
   stopSpeaking(): void {
-    this.speakToogle=false;
     this.ttsService.stopSpeaking();
+
   }
   shareContent(messsage:any): void {
     if (navigator.share) {
@@ -194,9 +200,19 @@ startChat(){
 }
 clickBtn(){
   let sideBtn = document.getElementById('side-button')  as HTMLButtonElement ;
-  sideBtn.classList.toggle('active');
-  sideBtn.textContent="okay"
-  // this.openMap();
+
+  if(this.speakToogle && this.clickedBtn){
+    this.speakToogle=false;
+    this.clickedBtn=false;
+  }
+  else if(this.copied && this.clickedBtn){
+    this.clickedBtn=true;
+  }else{
+    this.openSideBar();
+  }
+}
+openSideBar(){
+console.log("hllo")
 }
 openMap() {
   const latitude = 37.7749;  // Replace with your desired latitude
