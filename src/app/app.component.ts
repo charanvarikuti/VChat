@@ -272,6 +272,13 @@ openMap() {
   
   window.open(url, '_blank'); // Open in a new tab
 }
+onFocusOut(){
+  this.clickedBtn=false;
+  this.Options=true;
+  this.OptionsIcons=false;
+  this.copied=false;
+  this.speakToogle=false;
+}
 }
 
 

@@ -337,35 +337,37 @@
     height: 90vh;
 }
 .side-button {
-    position: fixed; /* Fixed positioning to keep it on the side */
-    right: -20px; /* Initially hidden off-screen */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for true center */
+    position: fixed; 
+    right: -20px; 
+    top: 50%; 
+    transform: translateY(-50%); 
     padding: 15px 20px;
-    background-color: #F6F6B1; /* Blue background */
+    background-color: #F6F6B1;
     color: black; /* White text */
     border: none; /* No border */
     border-radius: 25%; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     transition: right 0.3s; /* Smooth transition for sliding */
 }
 .side-button-inactive{
-  position: fixed; /* Fixed positioning to keep it on the side */
-  right: -20px; /* Initially hidden off-screen */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%); /* Adjust for true center */
+  position: fixed; 
+  right: -20px; 
+  top: 50%; 
+  transform: translateY(-50%); 
   padding: 15px 20px;
-  background-color: #F6F6B1; /* Blue background */
+  background-color: #F6F6B1;
   color: black; /* White text */
   border: none; /* No border */
   border-radius: 25%; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-  transition: right 0.3s; /* Smooth transition for sliding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transition: right 0.3s;
+  opacity: 0.5;
 }
 .side-button-active{
   right: 20px;
+  opacity: 1;
 }
 .side-button.active {
     right: 20px; /* Position when active */
@@ -374,5 +376,5 @@
 //   padding: 25px;
 // }
 // .act{
-//   right: 20px; /* Initially hidden off-screen */
+//   right: 20px; 
 // }
