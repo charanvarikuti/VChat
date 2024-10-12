@@ -42,6 +42,9 @@ export class AppComponent {
    transcript: string = '';
    isRecording: boolean = false;
    logoFlag:boolean=true;
+   Options:boolean=true;
+   OptionsIcons:boolean=false;
+   isDarkMode:boolean;
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
     public http: HttpClient,
@@ -62,13 +65,45 @@ export class AppComponent {
       this.initialFlag=false
     }
     this.urlToShare='https://yourwebsite.com'
-    // this.apiurl=apiUrlToken
   }
   ngOnInit(){
-    // this.buildForm()
-    let allItems = document.querySelectorAll('.dot');
+    // Check for saved theme preference in localStorage first
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme) {
+      this.isDarkMode = savedTheme === 'dark';
+    } else {
+      // If no saved theme, detect system theme
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      this.isDarkMode = prefersDarkScheme.matches;
+    }
+
+    this.applyTheme();
+
+    // Add listener to detect changes in the device's color scheme
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      this.isDarkMode = e.matches;  // Update mode based on user changes in system preferences
+      this.applyTheme();
+    });
 
   }
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    this.applyTheme();
+  }
+  applyTheme() {
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+      document.body.classList.remove('light-mode');
+      localStorage.setItem('theme', 'dark');  // Save preference
+    } else {
+      document.body.classList.add('light-mode');
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');  // Save preference
+    }
+  }
+  
   ngOnchanges(){
     let allItems = document.querySelectorAll('.dot');
     let inputField = document.getElementById('inputField'); 
@@ -128,11 +163,13 @@ export class AppComponent {
     this.clipboard.copy(text);  
     this.copied = true; 
     this.clickedBtn=true;
+    this.Options=false;
     this.speakToogle=false;
     this.clickBtn();
     setTimeout(() => {
       this.copied=false;
       this.clickedBtn=false;
+      this.Options=true;
     }, 1000);
     
   }
@@ -142,11 +179,12 @@ export class AppComponent {
     this.clickedBtn=true;
     this.copied=false;
     this.ttsService.speak(text.text);
-    
+    this.Options=false;
   }
   stopSpeaking(): void {
     this.ttsService.stopSpeaking();
-
+    this.Options=true;
+  
   }
   shareContent(messsage:any): void {
     if (navigator.share) {
@@ -200,19 +238,31 @@ startChat(){
 }
 clickBtn(){
   let sideBtn = document.getElementById('side-button')  as HTMLButtonElement ;
-
+  
   if(this.speakToogle && this.clickedBtn){
     this.speakToogle=false;
     this.clickedBtn=false;
+    this.Options=true;
   }
   else if(this.copied && this.clickedBtn){
     this.clickedBtn=true;
-  }else{
+  }else if(this.Options && !this.speakToogle && !this.copied){
+   
     this.openSideBar();
+  }else if(!this.Options){
+    this.closeSideBar();
   }
 }
 openSideBar(){
-console.log("hllo")
+  this.Options=!this.Options;
+  this.OptionsIcons=!this.OptionsIcons;
+  this.clickedBtn=true;
+  
+}
+closeSideBar(){
+    this.clickedBtn=!this.clickedBtn;
+    this.OptionsIcons=!this.OptionsIcons
+    this.Options=!this.Options;
 }
 openMap() {
   const latitude = 37.7749;  // Replace with your desired latitude

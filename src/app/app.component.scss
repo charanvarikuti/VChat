@@ -246,7 +246,9 @@
   .text-options:hover {
     opacity: 1; /* Change to 50% opacity on hover */
   }
-  
+  .text-options.dark-mode{
+    --text-color: #000000;
+  }
   .clear-icon {
     cursor: pointer;
     margin-left: -25px;
@@ -290,7 +292,7 @@
     justify-content: center; /* Horizontally centers the image */
     align-items: center;     /* Vertically centers the image */
     // height: 100vh; 
-    .logoV{
+    .logoVMainLight{
         cursor: pointer;
         height: 10rem;
         width: 10rem;
@@ -301,10 +303,23 @@
         background-position: center;
         position: relative;
         animation: scale 2s infinite ease-in-out;
-        // filter: invert(1);c
+        // filter: invert(1);
 
     }
+    .logoVMainDark{
+      cursor: pointer;
+      height: 10rem;
+      width: 10rem;
+      width: 100px;
+      height: 100px;
+      // background-image: url('v-logo.svg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      animation: scale 2s infinite ease-in-out;
+      filter: invert(1);
 
+  }
     @keyframes scale {
         0%, 100% {
           transform: scale(1);
@@ -355,6 +370,9 @@
 .side-button.active {
     right: 20px; /* Position when active */
 }
+// .side-button :hover{
+//   padding: 25px;
+// }
 // .act{
 //   right: 20px; /* Initially hidden off-screen */
 // }

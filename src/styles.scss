@@ -1,32 +1,48 @@
 /* Default Light Theme */
-:root {
-    --background-color: #ffffff;
-    --text-color: #000000;
-    --primary-color: #007bff;
-  }
+// :root {
+//     --background-color: #ffffff;
+//     --text-color: #000000;
+//     --primary-color: #007bff;
+//   }
   
-  /* Dark Theme - applied automatically if the user prefers dark mode */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background-color: #121212;
-      --text-color: #121212;
-      --primary-color: #bb86fc;
+//   /* Dark Theme - applied automatically if the user prefers dark mode */
+//   @media (prefers-color-scheme: dark) {
+//     :root {
+//       --background-color: #121212;
+//       --text-color: #121212;
+//       --primary-color: #bb86fc;
      
-    }
-    .logoV{
-        filter: invert(1);
-      }
-  }
+//     }
+//     .logoV{
+//         filter: invert(1);
+//       }
+//   }
   
-  /* Apply the variables to body, buttons, etc. */
-  body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
+//   /* Apply the variables to body, buttons, etc. */
+//   body {
+//     background-color: var(--background-color);
+//     color: var(--text-color);
+//   }
   
-  button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
-  }
+//   button {
+//     background-color: var(--primary-color);
+//     color: var(--text-color);
+//   }
 
-  
+  /* styles.css (global stylesheet) */
+
+body.light-mode {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+body.dark-mode {
+  --background-color: #121212;
+  --text-color: #000000;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
