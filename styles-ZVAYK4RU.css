@@ -1,0 +1,1 @@
+body.light-mode{--background-color: #ffffff;--text-color: #000000}body.dark-mode{--background-color:#1E1E1E;--text-color: #000000}body{background-color:var(--background-color);color:var(--text-color);transition:background-color .3s ease,color .3s ease}
