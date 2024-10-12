@@ -27,7 +27,7 @@
 //mobile 
 @media screen  and (max-width:767px) {
     .buttonsection{
-        margin-top: -1%;
+        margin-top: 0%;
         margin-left: 3%;
         cursor: pointer;
     } 
@@ -51,7 +51,7 @@
 @media screen  and (max-width:767px) {
     .form{
         .speech{
-            margin-top: 4px;
+            margin-top: 7px;
             width: 14%;
         }
     }
@@ -274,10 +274,11 @@
   .input-field{
     width: 99%; 
     border-radius: 10px;
-     height:25px;
+     height:30px;
      padding: 4px;   
      border: none;
-    background: #eeeee4;
+     background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+    // background: #eeeee4;
   }
   .input-field:focus {
     outline: none;

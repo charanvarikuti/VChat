@@ -252,7 +252,8 @@ clickBtn(){
   }else if(this.Options && !this.speakToogle && !this.copied){
    
     this.openSideBar();
-  }else if(!this.Options){
+  }
+  else if(!this.Options){
     this.closeSideBar();
   }
 }
@@ -267,7 +268,12 @@ closeSideBar(){
     this.OptionsIcons=!this.OptionsIcons
     this.Options=!this.Options;
 }
+clearChat(){
+  this.chatHistory=[]
+  this.logoFlag=true;
+}
 copyChat(){
+
   this.chatHistory.forEach((obj: { id: any; }) => {
     delete obj.id;
   });
@@ -280,7 +286,7 @@ copyChat(){
   .catch(err => {
     console.error('Failed to copy array: ', err);
   });
-  // this.clipboard.copy(this.chatHistory);  
+  this.clipboard.copy(this.chatHistory);  
 }
 openMap() {
   const latitude = 37.7749;  // Replace with your desired latitude
