@@ -37,6 +37,7 @@ export class AppComponent {
    textToSpeak: string = '';
    speakToogle:boolean=false;
    chatHistory:any=[];
+ 
    index:any=0;
    clickedBtn:boolean=false;
    transcript: string = '';
@@ -65,6 +66,7 @@ export class AppComponent {
       this.initialFlag=false
     }
     this.urlToShare='https://yourwebsite.com'
+    
   }
   ngOnInit(){
     // Check for saved theme preference in localStorage first
@@ -139,6 +141,7 @@ export class AppComponent {
       this.loader1=true
       this.speakToogle=false;
       // let index=0;
+     
       this.chatHistory.push( {user:true,text:c,});
           let submitButton = document.getElementById('sendbtn')  as HTMLInputElement;
       this.checkInput()
@@ -263,6 +266,21 @@ closeSideBar(){
     this.clickedBtn=!this.clickedBtn;
     this.OptionsIcons=!this.OptionsIcons
     this.Options=!this.Options;
+}
+copyChat(){
+  this.chatHistory.forEach((obj: { id: any; }) => {
+    delete obj.id;
+  });
+  let arrayString = JSON.stringify(this.chatHistory);
+
+  navigator.clipboard.writeText(arrayString)
+  .then(() => {
+    // console.log('Array copied to clipboard successfully!');
+  })
+  .catch(err => {
+    console.error('Failed to copy array: ', err);
+  });
+  // this.clipboard.copy(this.chatHistory);  
 }
 openMap() {
   const latitude = 37.7749;  // Replace with your desired latitude
