@@ -34,12 +34,29 @@
 body.light-mode {
   --background-color: #ffffff;
   --text-color: #000000;
+  font-family: sans-serif;
 }
 
 body.dark-mode {
+  font-family: sans-serif;
   // --background-color: #121212;
   --background-color:#1E1E1E;
   --text-color: #000000;
+  .input-field{
+    background: #2c2c2c;
+    color: white;
+  }
+  .bot{
+    background: #2c2c2c;
+    color: white;
+  }
+  .user{
+    background: #2c2c2c;
+    color: white;
+  }
+  .side-button-inactive{
+    opacity: 0.4;
+  }
 }
 
 body {

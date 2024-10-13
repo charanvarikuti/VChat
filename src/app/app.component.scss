@@ -157,7 +157,8 @@
   
   .user {
     float: right;
-    background-color: #d1e7ff;
+    // background-color: #d1e7ff;
+    background: #F6F6B1;
     margin-bottom: 5px;
     padding: 10px;
     border-radius: 10px;
@@ -165,9 +166,9 @@
   
   .bot {
     float: left;
-
+    background: #d1e7ff;
     width: 97%;
-    background-color: #f1f1f1;
+    // background-color: #f1f1f1;
     margin-bottom: 5px;
     padding: 10px;
     border-radius: 10px;
@@ -177,7 +178,8 @@
         float: left;
     
         width: 85%;
-        background-color: #f1f1f1;
+        background: #d1e7ff;
+        // background-color: #f1f1f1;
         margin-bottom: 5px;
         padding: 10px;
         border-radius: 10px;
@@ -273,7 +275,7 @@
 //   }
   .input-field{
     width: 99%; 
-    border-radius: 10px;
+    border-radius: 25px;
      height:30px;
      padding: 4px;   
      border: none;
@@ -354,14 +356,14 @@
 .side-button-inactive{
   position: fixed; 
   right: -20px; 
-  background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+  background: linear-gradient(to left, #d1e7ff, #F6F6B1);
   top: 50%; 
   transform: translateY(-50%); 
   padding: 15px 20px;
   background-color: #F6F6B1;
   color: black; /* White text */
   border: none; /* No border */
-  border-radius: 25%; /* Rounded corners */
+  border-radius: 25px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
   transition: right 0.3s;
@@ -371,6 +373,7 @@
   background: linear-gradient(to left, #d1e7ff, #F6F6B1);
   right: 20px;
   opacity: 1;
+  border-radius: 25px;
 }
 .side-button.active {
     right: 20px; /* Position when active */
@@ -381,3 +384,42 @@
 // .act{
 //   right: 20px; 
 // }
+.sendLight{
+/* background-color: #c9c6ac; */
+background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+/* color: white; */
+border-radius: 50%;
+/* height: 79%; */
+border: none;
+cursor: pointer;
+}
+.sendDark{
+/* background-color: #c9c6ac; */
+background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+/* color: white; */
+border-radius: 50%;
+/* height: 79%; */
+border: none;
+cursor: pointer;
+}
+
+.speakLight{
+  padding: 10px;
+  cursor: pointer;
+  /* margin: auto; */
+  margin-top: 1rem;
+  /* background: #c9c6ac; */
+  background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+  margin-right: 5px;
+  border-radius: 50%;
+}
+.speakDark{
+  padding: 10px;
+  cursor: pointer;
+  /* margin: auto; */
+  margin-top: 1rem;
+  /* background: #c9c6ac; */
+  background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+  margin-right: 5px;
+  border-radius: 50%;
+}
