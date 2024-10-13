@@ -35,6 +35,9 @@ body.light-mode {
   --background-color: #ffffff;
   --text-color: #000000;
   font-family: sans-serif;
+  // .logoVOptions{
+  //   filter: invert(1);
+  // }
 }
 
 body.dark-mode {
@@ -57,6 +60,10 @@ body.dark-mode {
   .side-button-inactive{
     opacity: 0.4;
   }
+  .logoVChat{
+    filter: invert(1);
+  }
+  
 }
 
 body {

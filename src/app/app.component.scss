@@ -158,7 +158,9 @@
   .user {
     float: right;
     // background-color: #d1e7ff;
-    background: #F6F6B1;
+    // background: #F6F6B1;
+    --tw-bg-opacity: 1;
+    background-color: rgb(244 244 244 / var(--tw-bg-opacity));
     margin-bottom: 5px;
     padding: 10px;
     border-radius: 10px;
@@ -166,8 +168,10 @@
   
   .bot {
     float: left;
-    background: #d1e7ff;
+    // background: #d1e7ff;
     width: 97%;
+    --tw-bg-opacity: 1;
+    background-color: rgb(244 244 244 / var(--tw-bg-opacity));
     // background-color: #f1f1f1;
     margin-bottom: 5px;
     padding: 10px;
@@ -176,9 +180,10 @@
   @media screen  and (max-width:767px) {
     .bot {
         float: left;
-    
+        --tw-bg-opacity: 1;
+        background-color: rgb(244 244 244 / var(--tw-bg-opacity));
         width: 85%;
-        background: #d1e7ff;
+        // background: #d1e7ff;
         // background-color: #f1f1f1;
         margin-bottom: 5px;
         padding: 10px;
@@ -289,6 +294,23 @@
 //   .main-continer{
 // height: 200px;
 //   }
+.logoVChat{
+  height: 20px;
+  width: 20px;
+  
+  border-radius: 50%;
+}
+.logoVOptions{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+.logoV{
+  height: 20px;
+  width: 20px;
+  
+  border-radius: 50%;
+}
 .initialPage{
     margin: auto;
     display: flex;
@@ -395,9 +417,11 @@ cursor: pointer;
 }
 .sendDark{
 /* background-color: #c9c6ac; */
-background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+// background: linear-gradient(to right, #d1e7ff, #F6F6B1);
 /* color: white; */
 border-radius: 50%;
+color: white;
+background: #2c2c2c;
 /* height: 79%; */
 border: none;
 cursor: pointer;
@@ -418,8 +442,10 @@ cursor: pointer;
   cursor: pointer;
   /* margin: auto; */
   margin-top: 1rem;
+  color: white;
+background: #2c2c2c;
   /* background: #c9c6ac; */
-  background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+  // background: linear-gradient(to right, #d1e7ff, #F6F6B1);
   margin-right: 5px;
   border-radius: 50%;
 }

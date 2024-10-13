@@ -39,9 +39,7 @@
                       </svg>
                 </a> -->
             </div>
-            <img class="logoV" style="height: 20px;
-            width: 20px;
-            background: white; border-radius: 50%;" *ngIf="!message.user" src="logo-removebg.png"/>
+            <img class="logoVChat" *ngIf="!message.user" src="logo-removebg.png"/>
             <span>
                 {{ message.text }} 
             </span>
@@ -101,9 +99,7 @@
                 </svg>    
             </a>
             <a *ngIf="Options">
-                <img  class="logoV" style="height: 20px;
-                width: 20px;
-                border-radius: 50%;"  src="logo-removebg.png"/>
+                <img  class="logoVOptions" src="logo-removebg.png"/>
 
             </a>
             <a *ngIf="OptionsIcons">
