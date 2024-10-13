@@ -158,7 +158,7 @@
   .user {
     float: right;
     // background-color: #d1e7ff;
-    // background: #F6F6B1;
+    // background: #ffffff;
     --tw-bg-opacity: 1;
     background-color: rgb(244 244 244 / var(--tw-bg-opacity));
     margin-bottom: 5px;
@@ -284,7 +284,7 @@
      height:30px;
      padding: 4px;   
      border: none;
-     background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+     background: linear-gradient(to right, #d1e7ff, #ffffff);
     // background: #eeeee4;
   }
   .input-field:focus {
@@ -367,7 +367,7 @@
     top: 50%; 
     transform: translateY(-50%); 
     padding: 15px 20px;
-    background-color: #F6F6B1;
+    background-color: #ffffff;
     color: black; /* White text */
     border: none; /* No border */
     border-radius: 25%; /* Rounded corners */
@@ -378,11 +378,11 @@
 .side-button-inactive{
   position: fixed; 
   right: -20px; 
-  background: linear-gradient(to left, #d1e7ff, #F6F6B1);
+  background: linear-gradient(to left, #d1e7ff, #ffffff);
   top: 50%; 
   transform: translateY(-50%); 
   padding: 15px 20px;
-  background-color: #F6F6B1;
+  background-color: #ffffff;
   color: black; /* White text */
   border: none; /* No border */
   border-radius: 25px; /* Rounded corners */
@@ -392,7 +392,7 @@
   opacity: 0.7;
 }
 .side-button-active{
-  background: linear-gradient(to left, #d1e7ff, #F6F6B1);
+  background: linear-gradient(to left, #d1e7ff, #ffffff);
   right: 20px;
   opacity: 1;
   border-radius: 25px;
@@ -408,7 +408,7 @@
 // }
 .sendLight{
 /* background-color: #c9c6ac; */
-background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+background: linear-gradient(to right, #d1e7ff, #ffffff);
 /* color: white; */
 border-radius: 50%;
 /* height: 79%; */
@@ -417,7 +417,7 @@ cursor: pointer;
 }
 .sendDark{
 /* background-color: #c9c6ac; */
-// background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+// background: linear-gradient(to right, #d1e7ff, #ffffff);
 /* color: white; */
 border-radius: 50%;
 color: white;
@@ -433,7 +433,7 @@ cursor: pointer;
   /* margin: auto; */
   margin-top: 1rem;
   /* background: #c9c6ac; */
-  background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+  background: linear-gradient(to right, #d1e7ff, #ffffff);
   margin-right: 5px;
   border-radius: 50%;
 }
@@ -445,7 +445,7 @@ cursor: pointer;
   color: white;
 background: #2c2c2c;
   /* background: #c9c6ac; */
-  // background: linear-gradient(to right, #d1e7ff, #F6F6B1);
+  // background: linear-gradient(to right, #d1e7ff, #ffffff);
   margin-right: 5px;
   border-radius: 50%;
 }
