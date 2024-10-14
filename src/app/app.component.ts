@@ -305,15 +305,16 @@ onFocusOut(){
   this.speakToogle=false;
 }
 captureScreen() {
-  const element = document.getElementById('chat-container') as HTMLElement; // Target element for screenshot
+  const element = document.getElementById('chatcontainer') as HTMLElement; // Target element for screenshot
   if (element) {
     html2canvas(element).then(canvas => {
       // Convert canvas to image and trigger download
-      const screenshot = canvas.toDataURL('image/png');
+      const VShot = canvas.toDataURL('image/png');
       const link = document.createElement('a');
-      link.href = screenshot;
-      link.download = 'screenshot.png';
+      link.href = VShot;
+      link.download = 'VShot.png';
       link.click(); // Automatically trigger download
+      this.clickedBtn=false;
     });
   }
 }

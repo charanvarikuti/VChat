@@ -8,12 +8,12 @@
             <toggle  class="toggle-btn" (changed)="checked"></toggle>
         </div>
     </header>
-    <div id="chat-container" class="chat-container" [ngClass]="{'chatC':logoFlag}" id="container">
+    <div  class="chat-container" [ngClass]="{'chatC':logoFlag}" id="container">
         <!-- <div class="options">
         </div> -->
        
           
-        <div class="messages" *ngIf="!logoFlag">
+        <div  id="chatcontainer" class="messages" *ngIf="!logoFlag">
           <div *ngFor="let message of chatHistory" [ngClass]="{'user': message.user, 'bot': !message.user}">
             <div class="options" *ngIf="!message.user">
                 <a  (click)="texttoSpeech(message);" id="message.id" class="text-options" style="cursor: pointer; padding: 4px;" >
