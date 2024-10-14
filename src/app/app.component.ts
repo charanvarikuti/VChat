@@ -10,7 +10,7 @@ import { API_URL } from './app.tokens';
 import { from } from 'rxjs';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { SpeechService } from './speechtotext.service';
-
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-root',
   // standalone: true,
@@ -22,6 +22,7 @@ export class AppComponent {
   title = 'geminidemo';
    form: FormGroup
    txt:any
+   checked: boolean;
    popup:any;
    apiurl:any
    reqtxt:any;
@@ -302,6 +303,19 @@ onFocusOut(){
   this.OptionsIcons=false;
   this.copied=false;
   this.speakToogle=false;
+}
+captureScreen() {
+  const element = document.getElementById('chat-container') as HTMLElement; // Target element for screenshot
+  if (element) {
+    html2canvas(element).then(canvas => {
+      // Convert canvas to image and trigger download
+      const screenshot = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = screenshot;
+      link.download = 'screenshot.png';
+      link.click(); // Automatically trigger download
+    });
+  }
 }
 }
 

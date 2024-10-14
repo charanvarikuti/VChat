@@ -12,10 +12,17 @@ import { API_URL } from './app.tokens';
 import { LoaderComponent } from './loader/loader.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+/* Import the MatSlideToggleModule */
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+/* Import BrowserAnimationsModule if not already imported */
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToggleComponent } from './toggle/toggle.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoaderComponent
+    LoaderComponent,
+    ToggleComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +30,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     MarkdownModule.forRoot(),
     ClipboardModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatSlideToggleModule,   
+    BrowserAnimationsModule,  
     // HttpClient
     // GoogleGenerativeAI
   ],
