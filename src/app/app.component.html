@@ -16,8 +16,8 @@
             <div class="requstForm">
                 <vform  [fields]="formData" (formChange)="onFormChange($event)" (inputClick)="onClick($event)"></vform>
             </div>
-            <div class="responseForm">
-                <!-- <vform  [fields]="formData" (formChange)="onFormChange($event)"></vform> -->
+            <div class="responseForm" *ngIf="responseFlag">
+                <vform  (formData)="submitformData($event)" [fields]="ResponseData" (formChange)="onResponseFormChange($event)"></vform>
             </div>
             <!-- <button (click)="onSubmit()">send</button> -->
         </div>
@@ -99,7 +99,7 @@
             <div class="fa-paper-plane"></div>
         </form>
         
-        <button class="side-button"   (focusout)="onFocusOut()" [ngClass]="{'side-button-active':clickedBtn,'side-button-inactive':!clickedBtn}" id="side-button" (click)="clickBtn()">
+        <button class="side-button"  *ngIf="!customChat"  (focusout)="onFocusOut()" [ngClass]="{'side-button-active':clickedBtn,'side-button-inactive':!clickedBtn}" id="side-button" (click)="clickBtn()">
             
             <a  (click)="stopSpeaking() ; " class="text-optionsx" *ngIf="speakToogle" style="cursor: pointer; padding: 4px;" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stop-btn" viewBox="0 0 16 16">
@@ -160,9 +160,21 @@
                     <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
                     <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
                 </svg>
+               
             </a>
                 
         </button>
+        <button class="side-button"  *ngIf="customChat"  (focusout)="onFocusCustomChatOut()" [ngClass]="{'side-button-active':clickedCustomBtn,'side-button-inactive':!clickedCustomBtn}" id="side-button" (click)="clickcustomBtn()">
+            <a *ngIf="homeFlag">
+                <svg   (click)="clickHome()" *ngIf="homeFlag" style="padding:6px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                </svg>
+            </a>
+           
+        </button>
+        <div class="messageSection"   *ngIf="customChat && Message">
+            <span *ngIf="Message">{{Message}}</span>
+        </div>
     </div>
  <!-- </div> -->
 

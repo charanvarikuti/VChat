@@ -531,3 +531,10 @@ input[type="checkbox"]:checked ~ .toggle-button-text {
   justify-content: left;
  }
 }
+.messageSection{
+    display: flex;
+    padding: 10px;
+    border-radius: 15px;
+    background: linear-gradient(to left, #d1e7ff, #ffffff);
+
+}

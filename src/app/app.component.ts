@@ -42,19 +42,25 @@ export class AppComponent {
    customChat:boolean=false;
    index:any=0;
    clickedBtn:boolean=false;
+   clickedCustomBtn:boolean=false;
    transcript: string = '';
    isRecording: boolean = false;
    logoFlag:boolean=true;
    Options:boolean=true;
    OptionsIcons:boolean=false;
    isDarkMode:boolean;
+   formGroupValues:any;
+   homeFlag:boolean=false;
+   Message:any;
    formData = [
-    { name: 'Maps', label: 'Maps', type: 'text', value: 'Maps' ,isReadonly:true},
-    { name: 'Gmail', label: 'Gmail', type: 'text', value: 'Gmail' ,isReadonly:true},
-    { name: 'Instagram', label: 'Instagram', type: 'text', value: 'Instagram' ,isReadonly:true},
-    { name: 'Whatsapp', label: 'Whatsapp', type: 'text', value: 'Whatsapp',isReadonly:true },
+    { name: 'Maps', label: '', type: 'text', value: 'Maps' ,isReadonly:true},
+    { name: 'Gmail', label: '', type: 'text', value: 'Gmail' ,isReadonly:true},
+    { name: 'Instagram', label: '', type: 'text', value: 'Instagram' ,isReadonly:true},
+    { name: 'Whatsapp', label: '', type: 'text', value: 'Whatsapp',isReadonly:true },
     // { name: 'email', label: 'Email', type: 'email', value: 'Open Instagram' ,isReadonly:true}
   ];
+  ResponseData :any=[]
+  responseFlag: boolean =false;
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
     public http: HttpClient,
@@ -80,20 +86,46 @@ export class AppComponent {
   onFormChange(form: FormGroup) {
     console.log('Form Changed:', form.value);
   }
-  onSubmit(){
-    console.log(this.form.value);
+  // onSubmit(){
+  //   console.log(this.form.value);
+  // }
+  submitformData(formGroupValues:any){
+    // console.log(data)
+    this.formGroupValues=formGroupValues;
+    if(this.formGroupValues.controls.Source.value && this.formGroupValues.controls.Destination.value){
+      this.openMap(this.formGroupValues);
+    }
+    
   }
   onClick(eve :any){
     console.log(eve)
-    if(eve.value=='Maps'){
-      this.openMap()
-    }else if(eve.value=="Gmail"){
-      this.openGmail() 
-    }else if(eve.value=="Instagram"){
-      this.openInstagramProfile() 
-    }else if(eve.value=="Whatsapp"){
-      this.openWhatsapp()
+    if(eve){
+      this.homeFlag=true;
+      if(eve.value=='Maps'){
+        this.responseFlag=true;
+        this.ResponseData=[
+          {name: 'Btn',btn:true},
+          { name: 'Source', label: 'Source', type: 'text', value: '' ,placeholder:"Enter Source",responseText:true},
+          { name: 'Destination', label: 'Destination', type: 'text', value: '' , placeholder:"Enter Destination",responseText:true},
+        ]
+        this.openCustomChat(eve.value)
+        // this.openMap()
+        this.responseFlag=true;
+      }else if(eve.value=="Gmail"){
+        this.openGmail() 
+      }else if(eve.value=="Instagram"){
+        this.openInstagramProfile() 
+      }else if(eve.value=="Whatsapp"){
+        this.openWhatsapp()
+      }
+    }else{
+      this.responseFlag=false;
+      this.ResponseData=[]
     }
+   
+  }
+  openCustomChat(data : any){
+    // this.responseFlag=true;
   }
   ngOnInit(){
     // Check for saved theme preference in localStorage first
@@ -266,8 +298,12 @@ startChat(){
   this.logoFlag=false;
 
 }
+clickcustomBtn(){
+
+}
 clickBtn(){
-  let sideBtn = document.getElementById('side-button')  as HTMLButtonElement ;
+  if(!this.customChat){
+    let sideBtn = document.getElementById('side-button')  as HTMLButtonElement ;
   
   if(this.speakToogle && this.clickedBtn){
     this.speakToogle=false;
@@ -283,6 +319,12 @@ clickBtn(){
   else if(!this.Options){
     this.closeSideBar();
   }
+  }
+}
+clickHome(){
+this.responseFlag=false;
+this.ResponseData=[];
+this.homeFlag=false
 }
 openSideBar(){
   this.Options=!this.Options;
@@ -315,27 +357,30 @@ copyChat(){
   });
   this.clipboard.copy(this.chatHistory);  
 }
-openMap() {
+openMap(data:any) {
+  const encodedSource = encodeURIComponent(data.controls.Source.value);
+    const encodedDestination = encodeURIComponent(data.controls.Destination.value);
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-
-        // Construct the Google Maps URL
-        const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
-        
-        // Open Google Maps in a new tab
+        const url = `https://www.google.com/maps/dir/?api=1&origin=${encodedSource}&destination=${encodedDestination}`;
         window.open(url, '_blank');
+        this.responseMessage()
       },
       (error) => {
         console.error('Error getting location:', error);
         alert('Unable to retrieve your location.');
+        
       }
     );
   } else {
     alert('Geolocation is not supported by this browser.');
   }
+}
+responseMessage(){
+this.Message="maps is Opened"
 }
 openGmail() {
   const url = 'https://mail.google.com/';
@@ -357,6 +402,12 @@ onFocusOut(){
   this.copied=false;
   this.speakToogle=false;
 }
+onFocusCustomChatOut(){
+
+}
+backHome(eve:any){
+  console.log(eve)
+}
 captureScreen() {
   const element = document.getElementById('chatcontainer') as HTMLElement; // Target element for screenshot
   if (element) {
@@ -376,10 +427,14 @@ onToggle(event: boolean) {
   if(!this.isToggled){
     this.customChat=true;
     this.logoFlag=false
+
   }else{
     this.customChat=false;
     this.logoFlag=true
   }
+}
+onResponseFormChange(eve :any){
+
 }
 }
 

@@ -12,12 +12,16 @@ export class VformsComponent implements OnInit {
   @Output() formChange = new EventEmitter<FormGroup>(); // Emits form group changes to parent
   @Output() inputClick = new EventEmitter<string>();
   form: FormGroup;
+  btn:boolean=false;
+  @Output() formData = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.createFormGroup(this.fields);
-    
+    if(this.form.controls['Btn']){
+      this.btn=true
+    }
     // Emit form changes to parent
     this.form.valueChanges.subscribe(value => {
       this.formChange.emit(this.form);
@@ -33,8 +37,12 @@ export class VformsComponent implements OnInit {
     return group;
   }
   sendData(){
-    console.log(this.form.value);
+    this.formData.emit(this.form)
   }
+  sendFormData(){
+    this.formData.emit(this.form)
+  }
+  
   onInputClick(eve:any){
     this.inputClick.emit(eve);
   }

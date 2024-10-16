@@ -1,6 +1,29 @@
-<form [formGroup]="form" (ngSubmit)="sendData()">
+<form  class="form" [formGroup]="form" (ngSubmit)="sendData()">
   <div class="forminput" *ngFor="let field of fields">
-    <!-- <label class="label">{{ field.label }}</label> -->
-    <input  (click)="onInputClick($event.target)" class="inputfld" [formControlName]="field.name" [type]="field.type" [readonly]="field.isReadonly">
+    <label class="label" *ngIf="field.label && field.textOnly">{{ field.label }}</label>
+     <!-- {{field | json}} -->
+    <input   
+    [ngClass]="{'responseinputfld':field.responseText}" 
+    class="inputfld" 
+    [placeholder]="field.placeholder" 
+    *ngIf="field.name !=='Btn' && ! field.textOnly" 
+    (click)="onInputClick($event.target)" 
+    [formControlName]="field.name" 
+    [type]="field.type" 
+    [readonly]="field.isReadonly">
+    <input   
+    [ngClass]="{'responseinputfld':field.responseText,'textOnlyClass':field.textOnly}" 
+    class="inputfld" 
+    [placeholder]="field.placeholder" 
+    *ngIf="field.name !=='Btn' && field.textOnly" 
+    (click)="onInputClick($event.target)" 
+    [formControlName]="field.name" 
+    [type]="field.type" 
+    [readonly]="field.isReadonly">
+  </div>
+  <div class="btnSection">
+
+    <button class="buttonbtn" *ngIf="btn" (click)="sendFormData()">Send</button>
+
   </div>
 </form>

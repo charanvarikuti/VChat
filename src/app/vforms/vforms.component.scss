@@ -7,7 +7,31 @@
         cursor: pointer;
     }
     .label{
-        display: inline-block;
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;    }
+    .responseinputfld{
+        border-radius: 15px;
+        background: linear-gradient(to left, #fc3164, #ffffff);
+        cursor: pointer;
     }
-    
+    .textOnlyClass{
+        border: none;
+    }
+}
+.btnSection{
+    display: flex;
+    justify-content: right;
+    .buttonbtn{
+        border-radius: 15px;
+        background: linear-gradient(to left, #d1e7ff, #ffffff);
+        cursor: pointer;
+    }
+}
+.form{
+    --tw-bg-opacity: 1;
+    border-radius: 15px;
+    background-color: rgb(244 244 244 / var(--tw-bg-opacity));
+    margin-bottom: 10px;
+    padding: 10px;
 }
