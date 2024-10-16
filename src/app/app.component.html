@@ -5,16 +5,25 @@
  <!-- <div class="main-continer" id="main-cont"> -->
     <header class="header">
         <div class="toggleSec">
-            <toggle  class="toggle-btn" (changed)="checked"></toggle>
+            <toggle  class="toggle-btn" (toggle)="onToggle($event)" ></toggle>
         </div>
     </header>
     <div  class="chat-container" [ngClass]="{'chatC':logoFlag}" id="container">
         <!-- <div class="options">
         </div> -->
        
-          
-        <div  id="chatcontainer" class="messages" *ngIf="!logoFlag">
-          <div *ngFor="let message of chatHistory" [ngClass]="{'user': message.user, 'bot': !message.user}">
+        <div  class="customChatSection" style="margin-top: 100px;" *ngIf="customChat" >
+            <div class="requstForm">
+                <vform  [fields]="formData" (formChange)="onFormChange($event)" (inputClick)="onClick($event)"></vform>
+            </div>
+            <div class="responseForm">
+                <!-- <vform  [fields]="formData" (formChange)="onFormChange($event)"></vform> -->
+            </div>
+            <!-- <button (click)="onSubmit()">send</button> -->
+        </div>
+
+        <div  id="chatcontainer" class="messages" *ngIf="!logoFlag && !customChat ">
+          <div   *ngFor="let message of chatHistory" [ngClass]="{'user': message.user, 'bot': !message.user}">
             <div class="options" *ngIf="!message.user">
                 <a  (click)="texttoSpeech(message);" id="message.id" class="text-options" style="cursor: pointer; padding: 4px;" >
                     <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-volume-up-fill" viewBox="0 0 16 16">
@@ -57,11 +66,10 @@
     
             <span></span><span></span><span></span> 
         </div>
-        <div class="initialPage" *ngIf="logoFlag" (click)="startChat()">
+        <div class="initialPage" *ngIf="logoFlag && !customChat" (click)="startChat()">
             <img [ngClass]="{'logoVMainDark':isDarkMode,'logoVMainLight':!isDarkMode}" src="logo-removebg.png"/>
-            <!-- <img class="logoV" src="logo-white.png"/> -->
         </div>
-        <form name="f" [formGroup]="form"  (ngSubmit)="sendData()"class="form">
+        <form name="f" [formGroup]="form"   (ngSubmit)="sendData()"class="form">
             <div class="speech">
                 <a (click)="startVoiceRecognition()"  *ngIf="!isRecording"  [ngClass]="{'speakLight':!isDarkMode,'speakDark':isDarkMode}" style="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
@@ -144,9 +152,13 @@
                 <svg    *ngIf="chatHistory.length" (click)="copyChat()" style="padding:6px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
                 </svg>
-                <svg  (click)="captureScreen()"  *ngIf="chatHistory.length" style="padding:6px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
+                <!-- <svg  (click)="captureScreen()"  *ngIf="chatHistory.length" style="padding:6px" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill" viewBox="0 0 16 16">
                     <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
                     <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0"/>
+                </svg> -->
+                <svg (click)="captureScreen()"  *ngIf="chatHistory.length" style="padding:6px"  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
                 </svg>
             </a>
                 

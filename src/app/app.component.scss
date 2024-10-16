@@ -151,8 +151,8 @@
 // }
 
   .messages {
-    flex-grow: 1;
-    overflow-y: auto;
+    // flex-grow: 1;
+    // overflow-y: auto;
     margin-bottom: 10px;
   }
   
@@ -520,4 +520,14 @@ input[type="checkbox"]:checked ~ .toggle-button-text {
     right: -150px;
     top: 14px;
 }
+}
+.customChatSection{
+ .requstForm{
+  display: flex;
+  justify-content: right;
+ }
+ .responseForm{
+  display: flex;
+  justify-content: left;
+ }
 }

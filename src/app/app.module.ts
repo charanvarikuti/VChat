@@ -14,15 +14,21 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 /* Import the MatSlideToggleModule */
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 /* Import BrowserAnimationsModule if not already imported */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToggleComponent } from './toggle/toggle.component';
+import { VformsComponent } from './vforms/vforms.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoaderComponent,
-    ToggleComponent
+    ToggleComponent,
+    VformsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,13 +39,16 @@ import { ToggleComponent } from './toggle/toggle.component';
     FontAwesomeModule,
     MatSlideToggleModule,   
     BrowserAnimationsModule,  
-    // HttpClient
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule
     // GoogleGenerativeAI
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
     GeminiService,
-    { provide: API_URL, useValue: 'AIzaSyAKDx17fXB_DBeq4HQjae4F4AZ8vvX' }
+    { provide: API_URL, useValue: 'AIzaSyAKDx17fXB_DBeq4HQjae4F4AZ8vvX' },
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

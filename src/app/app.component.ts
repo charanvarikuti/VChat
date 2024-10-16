@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { GeminiService } from './gemini-service.service';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators, FormControl, } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormArray, } from '@angular/forms';
 // import { GeminiService } from './gemini.service';
 import { TtsService } from './tts.service'
 import { API_URL } from './app.tokens';
@@ -11,6 +11,7 @@ import { from } from 'rxjs';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { SpeechService } from './speechtotext.service';
 import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-root',
   // standalone: true,
@@ -22,7 +23,7 @@ export class AppComponent {
   title = 'geminidemo';
    form: FormGroup
    txt:any
-   checked: boolean;
+   isToggled: boolean = true;
    popup:any;
    apiurl:any
    reqtxt:any;
@@ -38,7 +39,7 @@ export class AppComponent {
    textToSpeak: string = '';
    speakToogle:boolean=false;
    chatHistory:any=[];
- 
+   customChat:boolean=false;
    index:any=0;
    clickedBtn:boolean=false;
    transcript: string = '';
@@ -47,14 +48,19 @@ export class AppComponent {
    Options:boolean=true;
    OptionsIcons:boolean=false;
    isDarkMode:boolean;
+   formData = [
+    { name: 'Maps', label: 'Maps', type: 'text', value: 'Open Maps' ,isReadonly:true},
+    { name: 'lastName', label: 'Last Name', type: 'text', value: 'Open Whatsapp',isReadonly:true },
+    { name: 'email', label: 'Email', type: 'email', value: 'Open Instagram' ,isReadonly:true}
+  ];
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
     public http: HttpClient,
     public geminiService:GeminiService,
-    public fb: FormBuilder,
     private clipboard: Clipboard,
     private ttsService: TtsService,
-    private speechService: SpeechService
+    private speechService: SpeechService,
+    private fb: FormBuilder
     // @Inject(API_URL) private apiUrlToken: string
   )
   {
@@ -66,8 +72,20 @@ export class AppComponent {
     if(this.txt=="V-Chat"){
       this.initialFlag=false
     }
-    this.urlToShare='https://yourwebsite.com'
-    
+    this.urlToShare='https://yourwebsite.com';
+   
+  }
+  onFormChange(form: FormGroup) {
+    console.log('Form Changed:', form.value);
+  }
+  onSubmit(){
+    console.log(this.form.value);
+  }
+  onClick(eve :any){
+    console.log(eve)
+    if(eve.value=='Open Maps'){
+      this.openMap()
+    }
   }
   ngOnInit(){
     // Check for saved theme preference in localStorage first
@@ -316,6 +334,16 @@ captureScreen() {
       link.click(); // Automatically trigger download
       this.clickedBtn=false;
     });
+  }
+}
+onToggle(event: boolean) {
+  this.isToggled = event; 
+  if(!this.isToggled){
+    this.customChat=true;
+    this.logoFlag=false
+  }else{
+    this.customChat=false;
+    this.logoFlag=true
   }
 }
 }

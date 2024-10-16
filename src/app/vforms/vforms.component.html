@@ -1,0 +1,6 @@
+<form [formGroup]="form" (ngSubmit)="sendData()">
+  <div class="forminput" *ngFor="let field of fields">
+    <!-- <label class="label">{{ field.label }}</label> -->
+    <input  (click)="onInputClick($event.target)" class="inputfld" [formControlName]="field.name" [type]="field.type" [readonly]="field.isReadonly">
+  </div>
+</form>
