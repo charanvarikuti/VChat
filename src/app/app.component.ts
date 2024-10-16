@@ -49,9 +49,11 @@ export class AppComponent {
    OptionsIcons:boolean=false;
    isDarkMode:boolean;
    formData = [
-    { name: 'Maps', label: 'Maps', type: 'text', value: 'Open Maps' ,isReadonly:true},
-    { name: 'lastName', label: 'Last Name', type: 'text', value: 'Open Whatsapp',isReadonly:true },
-    { name: 'email', label: 'Email', type: 'email', value: 'Open Instagram' ,isReadonly:true}
+    { name: 'Maps', label: 'Maps', type: 'text', value: 'Maps' ,isReadonly:true},
+    { name: 'Gmail', label: 'Gmail', type: 'text', value: 'Gmail' ,isReadonly:true},
+    { name: 'Instagram', label: 'Instagram', type: 'text', value: 'Instagram' ,isReadonly:true},
+    { name: 'Whatsapp', label: 'Whatsapp', type: 'text', value: 'Whatsapp',isReadonly:true },
+    // { name: 'email', label: 'Email', type: 'email', value: 'Open Instagram' ,isReadonly:true}
   ];
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
@@ -83,8 +85,14 @@ export class AppComponent {
   }
   onClick(eve :any){
     console.log(eve)
-    if(eve.value=='Open Maps'){
+    if(eve.value=='Maps'){
       this.openMap()
+    }else if(eve.value=="Gmail"){
+      this.openGmail() 
+    }else if(eve.value=="Instagram"){
+      this.openInstagramProfile() 
+    }else if(eve.value=="Whatsapp"){
+      this.openWhatsapp()
     }
   }
   ngOnInit(){
@@ -308,12 +316,39 @@ copyChat(){
   this.clipboard.copy(this.chatHistory);  
 }
 openMap() {
-  const latitude = 37.7749;  // Replace with your desired latitude
-  const longitude = -122.4194; // Replace with your desired longitude
-  const zoom = 12; // Desired zoom level
-  const url = `https://www.google.com/maps/@?api=1&map_action=map&center=${latitude},${longitude}&zoom=${zoom}`;
-  
-  window.open(url, '_blank'); // Open in a new tab
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Construct the Google Maps URL
+        const url = `https://www.google.com/maps?q=${latitude},${longitude}`;
+        
+        // Open Google Maps in a new tab
+        window.open(url, '_blank');
+      },
+      (error) => {
+        console.error('Error getting location:', error);
+        alert('Unable to retrieve your location.');
+      }
+    );
+  } else {
+    alert('Geolocation is not supported by this browser.');
+  }
+}
+openGmail() {
+  const url = 'https://mail.google.com/';
+  window.open(url, '_blank');
+}
+openInstagramProfile() {
+  const url = 'https://www.instagram.com/'
+  window.open(url, '_blank');
+}
+openWhatsapp()
+{
+  const url = 'https://www.whatsapp.com/'
+  window.open(url, '_blank');
 }
 onFocusOut(){
   this.clickedBtn=false;
