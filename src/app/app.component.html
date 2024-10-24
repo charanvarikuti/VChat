@@ -76,7 +76,7 @@
         <div class="initialPage" *ngIf="logoFlag && !customChat" (click)="startChat()">
             <img [ngClass]="{'logoVMainDark':isDarkMode,'logoVMainLight':!isDarkMode}" src="logo-removebg.png"/>
         </div>
-        <form name="f" [formGroup]="form"   (ngSubmit)="sendData()"class="form">
+        <form name="f" [formGroup]="form"   (ngSubmit)="sendData()" [ngClass]="{'form':!customChat,'customForm':customChat}">
             <div class="speech">
                 <a (click)="startVoiceRecognition()"  *ngIf="!isRecording"  [ngClass]="{'speakLight':!isDarkMode,'speakDark':isDarkMode}" style="">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
