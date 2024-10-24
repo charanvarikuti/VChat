@@ -14,10 +14,17 @@
        
         <div  class="customChatSection" style="margin-top: 100px;" *ngIf="customChat" >
             <div class="requstForm">
-                <vform  [fields]="formData" (formChange)="onFormChange($event)" (inputClick)="onClick($event)"></vform>
+                <vform  *ngIf="false" [fields]="formData" (formChange)="onFormChange($event)" (inputClick)="onClick($event)"></vform>
             </div>
             <div class="responseForm" *ngIf="responseFlag">
                 <vform  (formData)="submitformData($event)" [fields]="ResponseData" (formChange)="onResponseFormChange($event)"></vform>
+            </div>
+            <div *ngFor="let item of customchatHistory"  [ngClass]="{'userChat':item.user,'botChat':!item.user}">
+                <span style="border-radius: 15px;
+                background: linear-gradient(to right, #d1e7ff, #ffffff);
+                cursor: pointer;" (click)="clickOptions(item)">{{item.Name}}</span>
+                <input  class="custominputChat" *ngIf="item.input" [placeholder]=" 'Enter ' + item.Name">
+                <button class="customChatBtn" *ngIf="item.btn"> Send</button>
             </div>
             <!-- <button (click)="onSubmit()">send</button> -->
         </div>

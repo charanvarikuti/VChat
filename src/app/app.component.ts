@@ -39,6 +39,7 @@ export class AppComponent {
    textToSpeak: string = '';
    speakToogle:boolean=false;
    chatHistory:any=[];
+   customchatHistory:any=[];
    customChat:boolean=false;
    index:any=0;
    clickedBtn:boolean=false;
@@ -61,6 +62,7 @@ export class AppComponent {
   ];
   ResponseData :any=[]
   responseFlag: boolean =false;
+  inputChat: boolean;
   // geminiService:GeminiService = inject(GeminiService);
   constructor( 
     public http: HttpClient,
@@ -81,7 +83,26 @@ export class AppComponent {
       this.initialFlag=false
     }
     this.urlToShare='https://yourwebsite.com';
-   
+   this.customchatHistory=[
+    {Name:'Maps',user:true},
+    {Name:'Instagram',user:true}
+   ]
+  }
+  clickOptions(item:any){
+    console.log(item);
+    if(item.Name=="Maps"){
+      // this.openMap();
+      this.inputChat=true;
+      // this.openCustomChat(item.Name)
+
+      const url = 'https://mail.google.com/';
+      // window.open(url, '_blank');
+      this.customchatHistory.push(
+        // {Name:"mapsopned",user:false},
+        {Name:"Source",user:false,input:true},
+        {Name:"Destination",user:false,input:true,btn:true}
+      )
+    }
   }
   onFormChange(form: FormGroup) {
     console.log('Form Changed:', form.value);
@@ -108,7 +129,7 @@ export class AppComponent {
           { name: 'Source', label: 'Source', type: 'text', value: '' ,placeholder:"Enter Source",responseText:true},
           { name: 'Destination', label: 'Destination', type: 'text', value: '' , placeholder:"Enter Destination",responseText:true},
         ]
-        this.openCustomChat(eve.value)
+        // this.openCustomChat(eve.value)
         // this.openMap()
         this.responseFlag=true;
       }else if(eve.value=="Gmail"){
@@ -357,7 +378,7 @@ copyChat(){
   });
   this.clipboard.copy(this.chatHistory);  
 }
-openMap(data:any) {
+openMap(data?:any) {
   const encodedSource = encodeURIComponent(data.controls.Source.value);
     const encodedDestination = encodeURIComponent(data.controls.Destination.value);
   if (navigator.geolocation) {

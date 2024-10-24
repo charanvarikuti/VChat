@@ -513,6 +513,8 @@ input[type="checkbox"]:checked ~ .toggle-button-text {
   transform: scale(0.5);
   position: relative;
   width: 100%;
+  display: flex;
+  justify-content: right;
 }
 @media screen  and (max-width:767px) {
 .toggle-btn{
@@ -537,4 +539,27 @@ input[type="checkbox"]:checked ~ .toggle-button-text {
     border-radius: 15px;
     background: linear-gradient(to left, #d1e7ff, #ffffff);
 
+}
+.userChat{
+  display: flex;
+  justify-content: right;
+  padding: 5px;
+
+}
+.botChat{
+  display: flex;
+  justify-content: left;
+  padding: 5px;
+}
+.custominputChat{
+  height: 4px;
+  width: 20%;
+  padding: 10px;
+  border-radius: 15px;
+  background: linear-gradient(to left, #fc3164, #ffffff);
+  // cursor: pointer;
+}
+.customChatBtn{
+  margin-left: 5px;
+  border-radius: 15px;
 }
